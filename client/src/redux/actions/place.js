@@ -7,7 +7,7 @@ export const addNewPlace = (data) => async(dispatch) =>{
 
         const places = await axios({
             method:"POST",
-            url:"http://localhost:4000/api/v1/place/addPlace",
+            url:"https://shy-lime-bull-tux.cyclic.app/api/v1/place/addPlace",
             data
         })
         dispatch(placeAddSuccess(places.data))
@@ -20,7 +20,7 @@ export const getUserPlaces = () => async(dispatch) =>{
         dispatch(placeRequest())
         const places = await axios({
             method:"GET",
-            url:"http://localhost:4000/api/v1/place/UserPlaces"
+            url:"https://shy-lime-bull-tux.cyclic.app/api/v1/place/UserPlaces"
         })
         dispatch(placesUserSuccess(places.data))
     } catch (error) {
@@ -33,7 +33,7 @@ export const getPlaceById = (id) => async(dispatch) =>{
         dispatch(placeRequest())
         const place = await axios({
             method:"GET",
-            url:`http://localhost:4000/api/v1/place/getPlace/${id}`
+            url:`https://shy-lime-bull-tux.cyclic.app/api/v1/place/getPlace/${id}`
         })
         dispatch(placeGetByIdSuccess(place.data))
     } catch (error) {
@@ -45,7 +45,7 @@ export const updatePlace = (data) => async(dispatch) =>{
         dispatch(placeRequest())
         const place = await axios({
             method:"PUT",
-            url:`http://localhost:4000/api/v1/place/${data.id}`,
+            url:`https://shy-lime-bull-tux.cyclic.app/api/v1/place/${data.id}`,
             data
         })
         dispatch(placeUpdateSuccess(place.data))
@@ -58,7 +58,7 @@ export const getAllPlaces = () => async(dispatch) =>{
         dispatch(placeRequest())
         const places = await axios({
             method:"GET",
-            url:"http://localhost:4000/api/v1/place"
+            url:"https://shy-lime-bull-tux.cyclic.app/api/v1/place"
         })
         dispatch(placeGetSuccess(places.data))
     } catch (error) {

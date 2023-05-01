@@ -4,14 +4,23 @@ import { getUserBookings } from '../redux/actions/booking'
 import {AiOutlineArrowRight} from 'react-icons/ai'
 import {BsCalendarDate} from 'react-icons/bs'
 import {differenceInCalendarDays} from 'date-fns'
+import ReactLoading from 'react-loading';
+
 function Booking() {
     const dispatch = useDispatch()
-    const bookings = useSelector((state) => state.booking.userBookings)
+    const {userBookings,loading} = useSelector((state) => state.booking)
 
     useEffect(() =>{
         dispatch(getUserBookings())
     },[dispatch])
-    if(bookings?.length <= 0)
+    if(loading){
+        return(
+          <div className='h-full w-full flex justify-center py-6 items-center'>
+            <ReactLoading type='spin' color={'blue'} height={67} width={35} />
+          </div>
+        )
+      }
+    if(userBookings?.length <= 0)
         return(
             <div className='flex justify-center mt-8 text-gray-500 font-semibold'>
                 <span>No Booking found</span>
@@ -19,11 +28,11 @@ function Booking() {
         )
   return (
     <div className='mt-4'>
-        {bookings?.length > 0 && <div className='flex flex-col gap-4 px-4'>
-            {bookings.map((booking) => (
+        {userBookings?.length > 0 && <div className='flex flex-col gap-4 px-4'>
+            {userBookings.map((booking) => (
                 <div className='sm:flex gap-4 bg-gray-200'>
                     <div className='sm:w-48 sm:h-36 h-44 rounded-lg p-1'>
-                        <img src={`http://localhost:4000/uploads/${booking.place.images[0]}`} className='w-full h-full overflow-hidden rounded-lg object-cover' alt="" />
+                        <img src={`${booking.place.images[0]}`} className='w-full h-full overflow-hidden rounded-lg object-cover' alt="" />
                     </div>
                     <div>
                         <h2 className='font-semibold text-lg'>{booking.place.title}</h2>

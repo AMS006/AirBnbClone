@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import ImageGallery from '../components/ImageGallery'
 import ImageViewer from '../components/ImageViewer'
-import Navbar from '../components/Navbar'
 import {differenceInCalendarDays} from 'date-fns'
 import { getPlaceById } from '../redux/actions/place'
 import { addUserBooking } from '../redux/actions/booking'
+import ReactLoading from 'react-loading';
+import HomeLayout from '../layouts/HomeLayout'
 
 function PlacePage() {
     const {id} = useParams()
@@ -21,14 +22,11 @@ function PlacePage() {
     useEffect(() =>{
         dispatch(getPlaceById(id))
     },[id])
-    const place = useSelector((state) => state.place.activePlace)
+    const {activePlace,loading} = useSelector((state) => state.place)
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log(name,maxGuest,checkIn,checkOut)
         const days = differenceInCalendarDays(new Date(checkOut),new Date(checkIn))
-        console.log(days)
-        const price = days * place.price
-        console.log(price)
+        const price = days * activePlace.price
         const data = {
             name,
             maxGuest,
@@ -46,38 +44,43 @@ function PlacePage() {
         setPhone('')    
     }
     const handleGuests = (val) =>{
-        console.log(place.maxGuests)
-        if(val < place.maxGuests)
+        if(val < activePlace.maxGuests)
             setMaxGuests(val)
         else
-            setMaxGuests(place.maxGuest)
+            setMaxGuests(activePlace.maxGuest)
+    }
+    if(loading){
+        return(
+          <div className='h-full w-full flex justify-center items-center'>
+            <ReactLoading type='spin' color={'blue'} height={67} width={35} />
+          </div>
+        )
     }
   return (
     <>
-        {open && place && <ImageGallery photos={place.images} title={place.title} setOpen={setOpen}/>}
-        {place && !open &&
+        {open && activePlace && <ImageGallery photos={activePlace.images} title={activePlace.title} setOpen={setOpen}/>}
+        {activePlace && !open &&
         <>
-            <Navbar />
             <div className='md:px-8 px-4 my-4'>
-                <h2 className='md:text-2xl text-xl font-semibold'>{place.title}</h2>
-                <a className='underline mt-2 text-gray-600 cursor-pointer hover:text-gray-900'>{place.address}</a>
+                <h2 className='md:text-2xl text-xl font-semibold'>{activePlace.title}</h2>
+                <a className='underline mt-2 text-gray-600 cursor-pointer hover:text-gray-900'>{activePlace.address}</a>
                 <div>
-                    <ImageViewer photos={place.images} title={place.title} setOpen={setOpen}/>
+                    <ImageViewer photos={activePlace.images} title={activePlace.title} setOpen={setOpen}/>
                 </div>
                 <div className='flex md:flex-row flex-col gap-3'>
                     <div>
                         <div>
                             <h3 className='font-semibold text-lg'>Description</h3>
-                            <p>{place.description}</p>
+                            <p>{activePlace.description}</p>
                         </div>
                         <div className='flex flex-col gap-1 mt-2'>
-                            <h5 className='flex items-center font-semibold'>Check-In-Time :&nbsp;<span>{place.checkIn}</span></h5> 
-                            <h5 className='flex items-center font-semibold'>Check-Out-Time :&nbsp;<span>{place.checkOut}</span></h5> 
-                            <h5 className='flex items-center font-semibold'>Price :&nbsp;<span>{place.price}</span>/night</h5> 
-                            <h5 className='flex items-center font-semibold'>Max-Guests :&nbsp;<span>{place.maxGuests}</span></h5> 
+                            <h5 className='flex items-center font-semibold'>Check-In-Time :&nbsp;<span>{activePlace.checkIn}</span></h5> 
+                            <h5 className='flex items-center font-semibold'>Check-Out-Time :&nbsp;<span>{activePlace.checkOut}</span></h5> 
+                            <h5 className='flex items-center font-semibold'>Price :&nbsp;<span>{activePlace.price}</span>/night</h5> 
+                            <h5 className='flex items-center font-semibold'>Max-Guests :&nbsp;<span>{activePlace.maxGuests}</span></h5> 
                             <h5>
                                 <span className='font-semibold'>All Services : </span>
-                                {place.perks.map((perk,index) =>(
+                                {activePlace.perks.map((perk,index) =>(
                                     <span className='capitalize' key={index}>{perk} ,</span>
                                 ))}
                             </h5>
@@ -119,4 +122,4 @@ function PlacePage() {
   )
 }
 
-export default PlacePage
+export default HomeLayout(PlacePage)

@@ -10,7 +10,7 @@ function ImageGallery({photos,setOpen,title}) {
         <div className='flex flex-col gap-3 justify-center px-6 bg-black items-center my-6'>
             {photos.map((photo) =>(
                 <div className='h-full w-full flex justify-center'>
-                    <img src={`http://localhost:4000/uploads/${photo}`} className='' alt="" />
+                    <img src={`${photo}`} className='' alt="" />
                 </div>
             ))}
         </div>

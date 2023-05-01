@@ -64,8 +64,8 @@ function AddNewPlacesPage() {
     }
     const handleAddImageLink = async(e) =>{
         e.preventDefault()
-        const image = await axios.post('http://localhost:4000/api/v1/place/addImage',{link:activeLink})
-        setImages((prev) => [...prev,image.data.name])
+        if(activeLink !== "")
+        setImages((prev) => [...prev,activeLink])
         setActiveLink("")
     }
     const handleUploadImage = async(files) =>{
@@ -73,7 +73,8 @@ function AddNewPlacesPage() {
         for(let i = 0;i<files.length;i++){
             form.append('files',files[i]);
         }
-        const {data} = await axios.post('http://localhost:4000/api/v1/place/upload',form)
+        const {data} = await axios.post('https://shy-lime-bull-tux.cyclic.app/api/v1/place/upload',form)
+
         const images = data.images
         setImages((prev) => [...prev,...images])
     }
@@ -104,14 +105,14 @@ function AddNewPlacesPage() {
                 <span className='text-sm text-gray-500'>more = better</span>
                 <div className='flex items-center gap-2'>
                     <input type={'url'} name="" className='w-full border border-gray-600 rounded-xl px-4 py-2' id="photo" placeholder='Add using a link ...jpg' value={activeLink} onChange={(e) =>setActiveLink(e.target.value)}/>
-                    <button className='border bg-gray-400 font-semibold text-white w-32 p-2 rounded' onClick={handleAddImageLink}>Add image</button>
+                    <button className='border bg-gray-800 font-semibold text-white w-32 p-2 rounded' onClick={handleAddImageLink}>Add image</button>
                 </div>
             </div>
             <div>
                 <div className='flex gap-2 flex-wrap  items-center'>
                     {images?.map((photo,index) =>(
                         <div className='h-32 w-32 rounded overflow-hidden relative' key={index}>
-                            <img src={`http://localhost:4000/uploads/${photo}`} className="h-full w-full object-cover" alt="" />
+                            <img src={`${photo}`} className="h-full w-full object-cover" alt="" />
                             <button className='absolute bottom-0 right-0 bg-red-500 text-white p-1 rounded' onClick={(ev) =>handleImageDelete(photo,ev)}><BsTrashFill /></button>
                             <button className='absolute bottom-0 left-0 text-yellow-400 text-lg p-1 bg-white rounded' onClick={(e) => handlePosition(photo,e)}>
                                 {photo === images[0] && <AiFillStar />}

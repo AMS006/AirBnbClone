@@ -6,7 +6,7 @@ export const getUserBookings = () => async(dispatch) =>{
         dispatch(bookingRequest())
         const booking = await axios({
             method:"GET",
-            url:'http://localhost:4000/api/v1/booking'
+            url:'https://shy-lime-bull-tux.cyclic.app/api/v1/booking'
         })
         dispatch(bookingGetSuccess(booking.data))
     } catch (error) {
@@ -18,7 +18,7 @@ export const addUserBooking = (data) => async(dispatch) =>{
         dispatch(bookingRequest())
         const booking = await axios({
             method:"POST",
-            url:"http://localhost:4000/api/v1/booking",
+            url:"https://shy-lime-bull-tux.cyclic.app/api/v1/booking",
             data
         })
         dispatch(bookingAddSuccess(booking.data))

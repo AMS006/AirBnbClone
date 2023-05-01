@@ -7,7 +7,7 @@ export const createUser = (user) => async(dispatch) =>{
 
         const userData = await axios({
             method:"POST",
-            url:"http://localhost:4000/api/v1/user/createUser",
+            url:"https://shy-lime-bull-tux.cyclic.app/api/v1/user/createUser",
             data:user
         })
         // dispatch(userSuccess(userData.data.user))
@@ -21,12 +21,11 @@ export const loginUser = (user) => async(dispatch) =>{
 
         const userData = await axios({
             method:"POST",
-            url:"http://localhost:4000/api/v1/user/login",
+            url:"https://shy-lime-bull-tux.cyclic.app/api/v1/user/login",
             data:user
         })
         dispatch(userSuccess(userData.data.user))
     } catch (error) {
-        console.log(error)
         dispatch(userFail(error.message))
     }
 }
@@ -36,7 +35,7 @@ export const logoutUser = (user) => async(dispatch) =>{
 
         await axios({
             method:"POST",
-            url:"http://localhost:4000/api/v1/user/logout"
+            url:"https://shy-lime-bull-tux.cyclic.app/api/v1/user/logout"
         })
         dispatch(logoutSuccess())
     } catch (error) {
@@ -49,7 +48,7 @@ export const getProfile = (user) => async(dispatch) =>{
 
         const userData = await axios({
             method:"GET",
-            url:"http://localhost:4000/api/v1/user/profile",
+            url:"https://shy-lime-bull-tux.cyclic.app/api/v1/user/profile",
         })
         dispatch(userSuccess(userData.data.user))
     } catch (error) {

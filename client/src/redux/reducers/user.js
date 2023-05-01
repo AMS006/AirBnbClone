@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user:undefined,
     loading:false,
-    error:undefined
+    error:""
 }
 const userSlice = createSlice({
     name:"User",
@@ -11,6 +11,7 @@ const userSlice = createSlice({
     reducers:{
         userRequest:(state) =>{
             state.loading = true
+            state.error = ""
         },
         userSuccess:(state,action) =>{
             state.loading = false

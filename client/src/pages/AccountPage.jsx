@@ -7,12 +7,13 @@ import {AiOutlinePlus} from 'react-icons/ai'
 import UserPlaces from '../components/UserPlaces';
 import { getUserPlaces } from '../redux/actions/place';
 import Booking from '../components/Booking';
+import ReactLoading from 'react-loading';
 
 function AccountPage() {
     const {subpage} = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const user = useSelector((state) => state.user.user)
+    const {user,loading} = useSelector((state) => state.user)
     useEffect(()=>{
         dispatch(getUserPlaces())
     },[dispatch])
@@ -28,9 +29,16 @@ function AccountPage() {
         dispatch(logoutUser())
         navigate('/')
     }
+    if(loading){
+        return(
+          <div className='h-full w-full flex justify-center items-center'>
+            <ReactLoading type='spin' color={'blue'} height={67} width={35} />
+          </div>
+        )
+      }
   return (
-    <div>
-        <div className='flex items-center w-full justify-center mt-4 md:gap-3 gap-1'>
+    <div className=''>
+        <div className='flex items-start w-full justify-center mt-4 md:gap-3 gap-1'>
             <Link to={'/account/profile'} className={createClass('profile')}>Profile</Link>
             <Link to={'/account/bookings'} className={createClass('bookings')}> My Bookings</Link>
             <Link to={'/account/accomadation'} className={createClass('accomadation')}>My Accomadations</Link>
