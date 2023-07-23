@@ -1,6 +1,6 @@
 # AirBnbClone
 
-![HomePage]([https://res.cloudinary.com/dkgoet9em/image/upload/v1682961451/TiffinManagment/AirBnb_f74is3.png](https://res.cloudinary.com/dkgoet9em/image/upload/v1690086153/TiffinManagment/AirBnbClone_hyb0no.png))
+![HomePage](https://res.cloudinary.com/dkgoet9em/image/upload/v1690086153/TiffinManagment/AirBnbClone_hyb0no.png)
 
 AirBnbClone is a basic Clone Application that is build using the MERN Stack stands for MongoDB, ExpressJS, ReactJS, NodeJS.
 
@@ -61,7 +61,11 @@ Installing Dependency for server
   npm i
 ```
 
-### Step-3 Adding Environment Variables
+### Step-3 Adding Environment Variables. If you want to create your own database you need to change Following link
+
+(https://shy-lime-bull-tux.cyclic.app/) -> (http://localhost:4000) in all files of client folder
+
+## Else you can use my database without changing the above link and  without adding below Environment variables
 
 To run this project, you will need to add the following environment variables to your .env file in server folder
 
@@ -71,7 +75,7 @@ To run this project, you will need to add the following environment variables to
 
 `MONGO_URI` : For this you need to create a database on MONGO CLOUD 
 
-`JWT_SECRET` : It will be a random combinations of character and digits
+`JWT_SECRET` : It will be a random combinations of characters and digits
 
 `CLOUDINARY_CLOUD_NAME` : From Cloudinary
 
@@ -112,4 +116,4 @@ start the Backend server by
   npm start
 ```
 
-after starting the both Frontend and Backend server you can access application on the browser by visiting (http://localhost:4000)
+after starting the both Frontend and Backend server you can access application on the browser by visiting (http://localhost:3000)
