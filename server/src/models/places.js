@@ -13,7 +13,11 @@ const placeSchema = new mongoose.Schema({
     perks:[String],
     checkIn:String,
     checkOut:String,
-    maxGuests:Number
+    maxGuests:Number,
+    status:{
+        type:String,
+        default:"Not Booked"
+    },
 })
 
 module.exports = mongoose.model('places',placeSchema)

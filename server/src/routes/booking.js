@@ -1,10 +1,11 @@
 const express = require('express')
 const { addBooking, getUserBookings } = require('../controllers/booking')
+const isAuthorized = require('../middleware/authorization')
 
 const router = express.Router()
 
-router.post('/',addBooking)
+router.post('/',isAuthorized,addBooking)
 
-router.get('/',getUserBookings);
+router.get('/',isAuthorized,getUserBookings)
 
 module.exports = router

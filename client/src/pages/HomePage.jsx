@@ -1,38 +1,38 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import ReactLoading from 'react-loading';
+import { BiSearch } from 'react-icons/bi';
 import HomeLayout from '../layouts/HomeLayout'
 import { getAllPlaces } from '../redux/actions/place'
-import ReactLoading from 'react-loading';
+import PlaceBox from '../components/PlaceBox'
 
 function HomePage() {
   const dispatch = useDispatch()
-  const {places,loading} = useSelector((state) => state.place);
+  const { places, loading } = useSelector((state) => state.place);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getAllPlaces())
-  },[])
-  if(loading){
-    return(
+  }, [dispatch])
+  if (loading) {
+    return (
       <div className='h-full w-full flex justify-center items-center'>
         <ReactLoading type='spin' color={'blue'} height={67} width={35} />
       </div>
     )
   }
   return (
-    <div className='mb-4'>
-      <h1 className='py-3 px-6 text-2xl font-semibold'>All Places</h1>
-        {places.length >0 && 
+    <div className='py-6 px-2'>
+      <div className='relative md:hidden flex items-center  gap-2 border shadow-md shadow-gray-300 rounded-full px-5 py-2 w-full'>
+        <input type="text" name="search" placeholder='Search By Location' className='focus:outline-none text-base w-11/12' id="search" />
+        <button className=' absolute right-0 rounded-full bg-red-500 text-white p-1.5 font-bold mx-2 flex justify-center items-center'>
+          <BiSearch size={20} />
+        </button>
+      </div>
+      <h1 className='py-3 px-6 text-2xl font-semibold'>All Accomadations</h1>
+      {places.length > 0 &&
         <div className='grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2  grid-cols-1 gap-x-4 gap-y-6 md:px-6 px-3 mt-4'>
-          {places.map((place,index) => (
-            <Link to={`/place/${place._id}`} key={index}>
-              <div className='flex aspect-square rounded-xl object-cover oveflow-hidden'>
-                <img src={`${place.images[0]}`} className='overflow-hidden object-cover w-full rounded-xl' alt="" />
-              </div>
-              <h2 className='font-semibold text-sm mt-2'>{place.address}</h2>
-              <h3 className='text-gray-500 text-sm truncate my-1'>{place.title}</h3>
-              <p className='text-sm'><span className='font-semibold'>Price : &nbsp;</span>₹{place.price}<span className='font-semibold'>/night</span></p>
-            </Link>
+          {places.map((place, index) => (
+            <PlaceBox place={place} key={index} />
           ))}
         </div>}
     </div>

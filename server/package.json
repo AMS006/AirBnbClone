@@ -4,21 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon ./src/index.js"
   },
   "author": "Anas Sain",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1334.0",
     "bcrypt": "^5.1.0",
+    "cloudinary": "^1.35.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "fs-extra": "^11.1.0",
+    "http": "^0.0.1-security",
     "image-downloader": "^4.3.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.0",
     "multer": "^1.4.5-lts.1",
-    "nodemon": "^2.0.20"
+    "node-schedule": "^2.1.1",
+    "nodemon": "^2.0.20",
+    "streamifier": "^0.1.1"
   }
 }

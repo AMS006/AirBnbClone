@@ -1,31 +1,37 @@
 import React from 'react'
-import {GrGallery} from 'react-icons/gr'
+import { PhotoProvider } from 'react-photo-view'
+import Image from './Image'
 
-function ImageViewer({photos,setOpen}) {
+function ImageViewer({ photos }) {
 
   return (
-    <div className='grid gap-2 md:grid-cols-[2fr_1fr_1fr] sm:grid-cols-[2fr_1fr] my-4 relative'>
-        <div className='h-full w-full cursor-pointer' onClick={() => setOpen(true)} >
-          <img src={`${photos[0]}`} className='object-cover rounded-lg h-full w-full cursor-pointer' alt="" />
+    <PhotoProvider>
+      {photos.length > 0 && <div className={`grid gap-2  ${photos.length >= 4 ? 'md:grid-cols-[2fr_1fr_1fr] sm:grid-cols-[2fr_1fr]' : `${photos.length >= 2 ? 'sm:grid-cols-[2fr_1fr]' : ''}`}  my-4 relative`}>
+        <div className={`h-full w-full cursor-pointer relative`}  >
+          <Image src={photos[0]} />
         </div>
-        <div className='sm:grid hidden grid-rows-2 gap-2 h-full w-full cursor-pointer'>
-          <div className='h-full w-full cursor-pointer' onClick={() => setOpen(true)}>
-            <img src={`${photos[1]}`} alt="" className='object-cover rounded-lg h-full w-full cursor-pointer' />
+        {photos.length >= 2 && <div className={`sm:grid hidden grid-rows-2 gap-2 h-full w-full cursor-pointer`}>
+          <div className='h-full w-full cursor-pointer'>
+            <Image src={photos[1]} />
           </div>
-          <div className='h-ful w-full'>
-            <img src={`${photos[2]}`} alt="" className='object-cover rounded-lg h-full w-full cursor-pointer' />
+          {photos.length >= 3 ?
+            <div className='h-full w-full cursor-pointer'>
+              <Image src={photos[2]} />
+            </div> :
+            <div className='flex justify-center items-center w-full h-full border rounded text-gray-400'>No Image</div>}
+        </div>}
+        {photos.length >= 4 && <div className={`md:grid hidden grid-rows-2 gap-2 h-full w-full cursor-pointer`}>
+          <div className='h-full w-full cursor-pointer'>
+            <Image src={photos[3]} />
           </div>
-        </div>
-        <div className='md:grid hidden grid-rows-2 gap-2 h-full w-full cursor-pointer'>
-          <div className='h-full w-full cursor-pointer' onClick={() => setOpen(true)}>
-            <img src={`${photos[3]}`} alt="" className='object-cover rounded-lg h-full w-full cursor-pointer' />
-          </div>
-          <div className='h-full w-full cursor-pointer' onClick={() => setOpen(true)}>
-            <img src={`${photos[4]}`} alt="" className='object-cover rounded-lg h-full w-full cursor-pointer' />
-          </div>
-        </div>
-        <button className='flex sm:text-base text-sm items-center gap-1 absolute bottom-3 bg-white py-2 px-3 border border-black shadow rounded-xl sm:right-5 right-2 ' onClick={() => setOpen(true)}><GrGallery /> Show all photos</button>
-    </div>
+          {photos.length >= 5 ?
+            <div className='h-full w-full cursor-pointer'>
+              <Image src={photos[4]} />
+            </div> :
+            <div className='flex justify-center items-center w-full h-full border rounded text-gray-400'>No Image</div>}
+        </div>}
+      </div>}
+    </PhotoProvider>
   )
 }
 
