@@ -1,6 +1,6 @@
 # AirBnbClone
 
-![HomePage](https://res.cloudinary.com/dkgoet9em/image/upload/v1682961451/TiffinManagment/AirBnb_f74is3.png)
+![HomePage]([https://res.cloudinary.com/dkgoet9em/image/upload/v1682961451/TiffinManagment/AirBnb_f74is3.png](https://res.cloudinary.com/dkgoet9em/image/upload/v1690086153/TiffinManagment/AirBnbClone_hyb0no.png))
 
 AirBnbClone is a basic Clone Application that is build using the MERN Stack stands for MongoDB, ExpressJS, ReactJS, NodeJS.
 
@@ -37,7 +37,6 @@ clone this project on your local system
 
 ```bash
   git clone https://github.com/AMS006/AirBnb-Clone
-  cd AirBnb-Clone
 ```
 
 ### Step-2 Installing Dependency
@@ -48,14 +47,14 @@ Installing Dependency for client and Server both
   cd AirBnb-Clone
 ```
 
-To Installing Dependency for client
+Installing Dependency for client
 
 ```bash
   cd client
   npm i
 ```
 
-To Installing Dependency for server
+Installing Dependency for server
 
 ```bash
   cd server
@@ -64,25 +63,21 @@ To Installing Dependency for server
 
 ### Step-3 Adding Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your .env file in server folder
 
 
 ### Environment Variables for Server
 
 
-`MONGO_URI`
+`MONGO_URI` : For this you need to create a database on MONGO CLOUD 
 
-`SECRET_KEY`
+`JWT_SECRET` : It will be a random combinations of character and digits
 
-`CLOUDINARY_CLOUD_NAME`
+`CLOUDINARY_CLOUD_NAME` : From Cloudinary
 
-`CLOUDINARY_API_KEY`
+`CLOUDINARY_API_KEY` : From Cloudinary
 
-`CLOUDINARY_API_SECRET`
-
-`KEY_ID`
-
-`KEY_SECRET`
+`CLOUDINARY_API_SECRET` : From Cloudinary
 
 
 ### Step-4 Start the Application on local machine
@@ -117,4 +112,4 @@ start the Backend server by
   npm start
 ```
 
-after starting the both Frontend and Backend server you can access application on the browser.
+after starting the both Frontend and Backend server you can access application on the browser by visiting (http://localhost:4000)
