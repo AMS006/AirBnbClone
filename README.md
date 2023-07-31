@@ -36,7 +36,7 @@ To Run AirBnbClone project on local system follow the simple steps:
 clone this project on your local system
 
 ```bash
-  git clone https://github.com/AMS006/AirBnb-Clone
+  git clone https://github.com/AMS006/AirBnbClone
 ```
 
 ### Step-2 Installing Dependency
@@ -44,7 +44,7 @@ clone this project on your local system
 Installing Dependency for client and Server both
 
 ```bash
-  cd AirBnb-Clone
+  cd AirBnbClone
 ```
 
 Installing Dependency for client
